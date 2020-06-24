@@ -1,36 +1,40 @@
 const { Client } = require('elasticsearch');
+const type = "_doc";
+let client;
+let elasticIndex;
 
-class Elastic {
-    constractor(uri, index) {
+const init = async (uri, index) => {
+    try {
         let connect = {};
-        if(typeof uri === "string")
+        if (typeof uri === "string")
             connect.host = uri;
         else
             connect.hosts = uri;
-        this.client = new Client(connect);
-        this.index = index;
-        this.type = "_doc";
-        this.client.indices.exists({index: index})
-            .then(IndexExists => {
-                if(!IndexExists){
-                    return this.client.indices.create({index: index})
-                }
-            })
-            .catch(error => {
-                throw new Error(error.message);
-            })
-    }
-
-    addDocument(obj, isError) {
-        try {
-            obj["@timestamp"] = new Date();
-            obj.severity = isError ? "error" : "info";
-            this.client.create({index: this.index, type: this.type, body: obj});
-        }catch (error) {
-            throw new Error(error.message);
+        client = new Client(connect);
+        elasticIndex = index;
+        const IndexExists = await client.indices.exists({index: index});
+        if (!IndexExists) {
+            await client.indices.create({index: index})
         }
+        return true;
+    }catch (error) {
+        return throw new Error(error.message);
     }
-
 }
 
-module.exports = Elastic;
+
+const addDocument = async (obj, isError) => {
+    try {
+        obj["@timestamp"] = new Date();
+        obj.severity = isError ? "error" : "info";
+        await client.create({index: this.index, type: this.type, body: obj});
+    }catch (error) {
+        return throw new Error(error.message);
+    }
+}
+
+
+module.exports = {
+    init: init,
+    addDocument: addDocument
+};
