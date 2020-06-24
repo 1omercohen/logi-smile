@@ -1,6 +1,6 @@
 {
   "name": "logi-smile",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "write logs to elasticsearch",
   "license": "MIT",
   "main": "index.js",
@@ -9,12 +9,20 @@
     "url": "https://github.com/1omercohen/logi-smile.git"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
-  "keywords": ["log", "logs", "logger", "elasticsearch logger"],
+  "keywords": [
+    "log",
+    "logs",
+    "logger",
+    "elasticsearch logger"
+  ],
   "author": "Omer Cohen",
   "dependencies": {
     "elasticsearch": "^16.7.1",
     "validate.js": "^0.13.1"
+  },
+  "devDependencies": {
+    "jest": "^26.1.0"
   }
 }

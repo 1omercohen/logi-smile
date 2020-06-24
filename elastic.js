@@ -18,7 +18,7 @@ const init = async (uri, index) => {
         }
         return true;
     }catch (error) {
-        return throw new Error(error.message);
+        return new Error(error.message);
     }
 }
 
@@ -29,7 +29,7 @@ const addDocument = async (obj, isError) => {
         obj.severity = isError ? "error" : "info";
         await client.create({index: this.index, type: this.type, body: obj});
     }catch (error) {
-        return throw new Error(error.message);
+        return new Error(error.message);
     }
 }
 
