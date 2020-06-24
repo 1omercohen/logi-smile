@@ -1,0 +1,17 @@
+{
+  "name": "logi-smile",
+  "version": "1.1.0",
+  "description": "write logs to elasticsearch",
+  "license": "MIT",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Omer Cohen",
+  "dependencies": {
+    "elasticsearch": "^16.7.1",
+    "validate.js": "^0.13.1"
+  }
+}
